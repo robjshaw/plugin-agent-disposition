@@ -1,6 +1,6 @@
 # Flex Agent Disposition + WFO
 
-![Agent Disposition UI](https://indigo-bombay-5783.twil.io/assets/agent-disposition.png)
+![Agent Disposition UI](https://razzmatazz-chihuahua-5529.twil.io/assets/disposition.png)
 
 Ask Agents to classify the intent of a conversation during post wrap-up but before Task Completion. The captured data will be submitted into WFO for reporting.
 
