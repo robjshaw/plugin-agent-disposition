@@ -1,0 +1,21 @@
+{
+  "Disposition 1": [
+    "Sub Disposition 1",
+    "Sub Disposition 2",
+    "Sub Disposition 3",
+    "Sub Disposition 4"
+  ],
+  "Disposition 2": [
+    "Sub Disposition 1 2",
+    "Sub Disposition 2 2",
+    "Sub Disposition 3 2",
+    "Sub Disposition 4 2",
+    "Sub Disposition 5 2"
+  ],
+  "Disposition 3": [
+    "Sub Disposition 1 3",
+    "Sub Disposition 2 3",
+    "Sub Disposition 3 3",
+    "Sub Disposition 4 3"
+    ]
+}

@@ -5,8 +5,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Dispositions from './dispositions.json';
+
+const parent_dispositions = [{ value: 0, label: '' }];
+
+var child_dispositions = [{ value: 0, label: '' }];
+
+for (var key in Dispositions) {
+    var temp = { value: key, label: key};
+    parent_dispositions.push(temp);
+}
 
 export default class AgentDispositionModal extends React.Component {
   constructor(props) {
@@ -16,9 +25,11 @@ export default class AgentDispositionModal extends React.Component {
     this.cancelForm = this.cancelForm.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.handleDispositionChange = this.handleDispositionChange.bind(this);
+    this.handleChildDispositionChange = this.handleChildDispositionChange.bind(this);
     this.state = {
       open: false,
-      disposition: 'option-1'
+      disposition: 'Disposition 1',
+      child_disposition: ''
     };
   }
 
@@ -40,11 +51,27 @@ export default class AgentDispositionModal extends React.Component {
 
   submitForm() {
     this.setState({ open: false });
-    var event = new CustomEvent('agentDispositionSuccessful', { detail: { disposition: this.state.disposition }});
+    var event = new CustomEvent('agentDispositionSuccessful', { detail: { disposition: this.state.disposition + this.state.child_disposition }});
     window.dispatchEvent(event);
   }
 
   handleDispositionChange(event) {
+
+    var tempArray = Dispositions[event.target.value];
+
+    child_dispositions = [];
+
+    for (var key in tempArray) {
+      var temp = { value: tempArray[key], label: tempArray[key]};
+      child_dispositions.push(temp);
+    }
+
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleChildDispositionChange(event) {
+    // child_dispositions
+
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -69,11 +96,26 @@ export default class AgentDispositionModal extends React.Component {
                 'marginTop': '20px'
               }}
             >
-              <MenuItem value="option-1">Option 1</MenuItem>
-              <MenuItem value="option-2">Option 2</MenuItem>
-              <MenuItem value="option-3">Option 3</MenuItem>
-              <MenuItem value="option-4">Option 4</MenuItem>
-              <MenuItem value="option-5">Option 5</MenuItem>
+            {parent_dispositions.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+            </Select>
+            <br />
+            <Select
+              onChange={this.handleChildDispositionChange}
+              value={this.state.child_disposition}
+              name="child_disposition"
+              style={{
+                'marginTop': '20px'
+              }}
+            >
+            {child_dispositions.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
             </Select>
           </DialogContent>
           <DialogActions style={{
