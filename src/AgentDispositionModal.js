@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from '@material-ui/core/Select';
 import Dispositions from './dispositions.json';
 
-const parent_dispositions = [{ value: 0, label: '' }];
+const parent_dispositions = [];
 
 var child_dispositions = [{ value: 0, label: '' }];
 
@@ -28,8 +28,9 @@ export default class AgentDispositionModal extends React.Component {
     this.handleChildDispositionChange = this.handleChildDispositionChange.bind(this);
     this.state = {
       open: false,
-      disposition: 'Disposition 1',
-      child_disposition: ''
+      disposition: '',
+      child_disposition: '',
+      disableSubmit: 'true'
     };
   }
 
@@ -51,7 +52,7 @@ export default class AgentDispositionModal extends React.Component {
 
   submitForm() {
     this.setState({ open: false });
-    var event = new CustomEvent('agentDispositionSuccessful', { detail: { disposition: this.state.disposition + this.state.child_disposition }});
+    var event = new CustomEvent('agentDispositionSuccessful', { detail: { disposition: this.state.disposition + ' - ' + this.state.child_disposition }});
     window.dispatchEvent(event);
   }
 
@@ -73,9 +74,11 @@ export default class AgentDispositionModal extends React.Component {
     // child_dispositions
 
     this.setState({ [event.target.name]: event.target.value });
+    this.setState({ disableSubmit: false });
   };
 
   render() {
+
     return (
       <div>
         <Dialog
@@ -122,10 +125,7 @@ export default class AgentDispositionModal extends React.Component {
             margin: '0',
             padding: '8px 4px'
           }}>
-            <Flex.Button onClick={this.cancelForm}>
-              Cancel
-            </Flex.Button>
-            <Flex.Button onClick={this.submitForm}>
+            <Flex.Button onClick={this.submitForm} disabled={this.state.disableSubmit}>
               Submit
             </Flex.Button>
           </DialogActions>
