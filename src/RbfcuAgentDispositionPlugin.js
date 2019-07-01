@@ -22,6 +22,8 @@ export default class RbfcuAgentDispositionPlugin extends FlexPlugin {
       sortOrder: 1
     })
 
+    flex.AgentDesktopView.defaultProps.showPanel2 = false;
+
     flex.Actions.addListener('beforeCompleteTask', (payload, abort) => {
       // publish a window event to open the modal component
       var event = new Event('agentDispositionModalOpen');
@@ -34,12 +36,9 @@ export default class RbfcuAgentDispositionPlugin extends FlexPlugin {
         window.addEventListener('agentDispositionSuccessful', (e) => {
           // get existing attributes
           let attributes = payload.task.attributes;
-          // merge new attributes
-          attributes = Object.assign(attributes, {
-            conversations: {
-              outcome: e.detail.disposition
-            }
-          });
+          // merge new attribute
+          attributes.conversations.outcome = e.detail.disposition;
+
           // set new attributes on the task
           payload.task.setAttributes(attributes);
           // complete the task

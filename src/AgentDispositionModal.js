@@ -52,7 +52,8 @@ export default class AgentDispositionModal extends React.Component {
 
   submitForm() {
     this.setState({ open: false });
-    var event = new CustomEvent('agentDispositionSuccessful', { detail: { disposition: this.state.disposition + ' - ' + this.state.child_disposition }});
+    var complete_disposition = this.state.disposition + " - " + this.state.child_disposition;
+    var event = new CustomEvent('agentDispositionSuccessful', { detail: { disposition: complete_disposition }});
     window.dispatchEvent(event);
   }
 
