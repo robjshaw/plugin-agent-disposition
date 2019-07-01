@@ -22,8 +22,6 @@ export default class RbfcuAgentDispositionPlugin extends FlexPlugin {
       sortOrder: 1
     })
 
-    flex.AgentDesktopView.defaultProps.showPanel2 = false;
-
     flex.Actions.addListener('beforeCompleteTask', (payload, abort) => {
       // publish a window event to open the modal component
       var event = new Event('agentDispositionModalOpen');
@@ -37,12 +35,19 @@ export default class RbfcuAgentDispositionPlugin extends FlexPlugin {
           // get existing attributes
           let attributes = payload.task.attributes;
           // merge new attribute
-          attributes.conversations.outcome = e.detail.disposition;
+          if (typeof attributes.conversations !== 'undefined') {
+            
+            attributes.conversations.outcome = e.detail.disposition;
+            // set new attributes on the task
+            payload.task.setAttributes(attributes);
+            // complete the task
+            resolve(`Agent completed task with code: ${e.detail.disposition}`);
 
-          // set new attributes on the task
-          payload.task.setAttributes(attributes);
-          // complete the task
-          resolve(`Agent completed task with code: ${e.detail.disposition}`);
+          } else {
+            
+            resolve(`Agent completed task with code: rejected`);
+            
+          }
         }, false)
 
         // if the agent decides to cancel the modal window
