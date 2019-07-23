@@ -24,43 +24,39 @@ export default class RbfcuAgentDispositionPlugin extends FlexPlugin {
 
     flex.Actions.addListener('beforeCompleteTask', (payload, abort) => {
       // publish a window event to open the modal component
-      
-      if (payload.task.attributes.direction === 'inbound'){
-      
-        var event = new Event('agentDispositionModalOpen');
-        window.dispatchEvent(event);
+      var event = new Event('agentDispositionModalOpen');
+      window.dispatchEvent(event);
 
-        // returns a promise to modify the beforeCompleteTask Behavior
-        return new Promise((resolve, reject) => {
+      // returns a promise to modify the beforeCompleteTask Behavior
+      return new Promise((resolve, reject) => {
 
-          // if the agent successfully selects a disposition
-          window.addEventListener('agentDispositionSuccessful', (e) => {
-            // get existing attributes
-            let attributes = payload.task.attributes;
-            // merge new attribute
-            if (typeof attributes.conversations !== 'undefined') {
-              
-              attributes.conversations.outcome = e.detail.disposition;
-              // set new attributes on the task
-              payload.task.setAttributes(attributes);
-              // complete the task
-              resolve(`Agent completed task with code: ${e.detail.disposition}`);
+        // if the agent successfully selects a disposition
+        window.addEventListener('agentDispositionSuccessful', (e) => {
+          // get existing attributes
+          let attributes = payload.task.attributes;
+          // merge new attribute
+          if (typeof attributes.conversations !== 'undefined') {
+            
+            attributes.conversations.outcome = e.detail.disposition;
+            // set new attributes on the task
+            payload.task.setAttributes(attributes);
+            // complete the task
+            resolve(`Agent completed task with code: ${e.detail.disposition}`);
 
-            } else {
-              
-              resolve(`Agent completed task with code: rejected`);
-              
-            }
-          }, false)
+          } else {
+            
+            resolve(`Agent completed task with code: rejected`);
+            
+          }
+        }, false)
 
-          // if the agent decides to cancel the modal window
-          window.addEventListener('agentDispositionCanceled', (e) => {
-            abort()
-            reject('Agent Canceled Disposition');
-          }, false)
+        // if the agent decides to cancel the modal window
+        window.addEventListener('agentDispositionCanceled', (e) => {
+          abort()
+          reject('Agent Canceled Disposition');
+        }, false)
 
-        })
-      }
+      })
     })
   }
 }
