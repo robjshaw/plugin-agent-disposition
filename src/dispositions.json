@@ -1,21 +1,96 @@
 {
-  "Disposition 1": [
-    "Sub Disposition 1",
-    "Sub Disposition 2",
-    "Sub Disposition 3",
-    "Sub Disposition 4"
+  "Damage": [
+    "Single Vehicle Accident",
+    "Update Personal Details",
+    "Exit/Downgrade Account",
+    "Late Payment Fee"
   ],
-  "Disposition 2": [
-    "Sub Disposition 1 2",
-    "Sub Disposition 2 2",
-    "Sub Disposition 3 2",
-    "Sub Disposition 4 2",
-    "Sub Disposition 5 2"
+  "Activations":[
+    "Activate new smartcard",
+    "Activate replacement smartcard",
+    "Pickup Locations",
+    "Application follow up",
+    "Request new smartcard"
   ],
-  "Disposition 3": [
-    "Sub Disposition 1 3",
-    "Sub Disposition 2 3",
-    "Sub Disposition 3 3",
-    "Sub Disposition 4 3"
-    ]
+  "Accounts": [
+    "Renewal Fee",
+    "Infringement",
+    "Update Personal Details",
+    "Exit/Downgrade Account",
+    "Late Payment Fee",
+    "Update Payment Method",
+    "Take Payment",
+    "System Generated Fines",
+    "Add/Remove Driver",
+    "Signup new Account",
+    "Promocode not applied",
+    "Username/Password Reset",
+    "Pre-Authorisation",
+    "Rates Change",
+    "Privacy Request",
+    "Suspend/Reactivate"
+  ],
+  "At Car (Booking Start)": [
+    "Car not in pod",
+    "Card Reader Detached)",
+    "Card Reader Frozen",
+    "Flat Battery",
+    "Flat Tyre",
+    "Mechanical",
+    "Comms Issue - Moved/Cancelled",
+    "Wrong smartcard",
+    "Parking Pass",
+    "Steering Wheel Lock",
+    "Not Pushed (correct smartcard)",
+    "Member not tagged on",
+    "Low Fuel"
+  ],
+  "Fuel Card Failure": [
+    "Missing",
+    "Pin Locked",
+    "Incorrect Pertrol",
+    "Unknown",
+    "Not Accepted"
+  ],
+  "At Car (Mid Booking)": [
+    "Car not in pod",
+    "Card Reader Frozen",
+    "Member not tagged on",
+    "Flat Battery",
+    "Flat Tyre",
+    "Mechanical",
+    "Locked Out",
+    "Steering Wheel Lock",
+    "Towed",
+    "Card Reader Detached",
+    "Lost Smartcard",
+    "Pod Occupied/No Park"
+  ],
+  "At Car": [
+    "Other"
+  ],
+  "Condition of Car": [
+    "Dirty",
+    "Pet Hair/Smoking",
+    "Wiper Fluid"
+  ],
+  "Bookings": [
+    "Create",
+    "Extend",
+    "Cancel",
+    "Modify",
+    "Enquiry"
+  ],
+  "Misc": [
+    "Transfer",
+    "System Outage",
+    "Escalation",
+    "Dropped Call",
+    "MOP",
+    "Lost Property",
+    "La Trobe",
+    "KeoRide",
+    "Iphone App",
+    "Android App"
+  ]
 }
